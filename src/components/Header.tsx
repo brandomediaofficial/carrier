@@ -106,7 +106,6 @@ const Header = () => {
             className="relative"
             onMouseEnter={() => {
               setProductsOpen(true);
-              setActiveBrand(brands[0].label);
             }}
             onMouseLeave={() => {
               setProductsOpen(false);
@@ -137,7 +136,12 @@ const Header = () => {
                       onMouseEnter={() => setActiveBrand(brand.label)}
                     >
                       {brand.label}{" "}
-                      <ChevronDown size={14} className="-rotate-90" />
+                      <ChevronDown
+                        size={14}
+                        className={
+                          activeBrand === brand.label ? "" : "-rotate-90"
+                        }
+                      />
                     </button>
                   ))}
                 </div>

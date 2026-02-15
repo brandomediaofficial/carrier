@@ -12,23 +12,19 @@ const Footer = () => {
           </h3>
           <ul className="space-y-2 text-sm">
             {[
-              "Home",
-              "About Us",
-              "Products",
-              "Services",
-              "Our Clients",
-              "Contact Us",
-            ].map((item) => (
-              <li key={item}>
+              { name: "Home", path: "/" },
+              { name: "About Us", path: "/about" },
+              { name: "Products", path: "/products" },
+              { name: "Services", path: "/services" },
+              { name: "Our Clients", path: "/clients" },
+              { name: "Contact Us", path: "/contact" },
+            ].map((link) => (
+              <li key={link.name}>
                 <Link
-                  to={
-                    item === "Home"
-                      ? "/"
-                      : `/${item.toLowerCase().replace(/\s+/g, "-").replace("our-", "")}`
-                  }
+                  to={link.path}
                   className="hover:text-primary transition-colors"
                 >
-                  {item}
+                  {link.name}
                 </Link>
               </li>
             ))}
