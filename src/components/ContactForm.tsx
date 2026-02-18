@@ -16,6 +16,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
   const [isSending, setIsSending] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -28,36 +29,29 @@ const ContactForm = () => {
   const onSubmit = async (data: FormValues) => {
     setIsSending(true);
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      toast.error(
-        "Email service configuration is missing. Please contact support.",
-      );
-      setIsSending(false);
-      return;
-    }
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
     try {
       await emailjs.send(
         serviceId,
         templateId,
         {
-          from_name: data.name,
-          from_email: data.email,
+          name: data.name,
+          email: data.email,
           phone: data.phone,
           message: data.message,
-          to_name: "Admin", // Or whoever receives the email
+          subject: "New Contact Form Enquiry",
         },
-        publicKey,
+        publicKey
       );
+
       toast.success("Message sent successfully! We'll get back to you soon.");
       reset();
     } catch (error) {
       console.error("EmailJS Error:", error);
-      toast.error("Failed to send message. Please try again later.");
+      toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSending(false);
     }
@@ -66,6 +60,7 @@ const ContactForm = () => {
   return (
     <div>
       <h2 className="text-3xl font-bold mb-8">Quick Enquiry</h2>
+
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1">
@@ -73,7 +68,7 @@ const ContactForm = () => {
               {...register("name")}
               type="text"
               placeholder="Name"
-              className={`w-full bg-transparent border px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-white/60 ${
+              className={`w-full bg-transparent border px-4 py-3 text-sm text-white ${
                 errors.name ? "border-red-500" : "border-white/30"
               }`}
             />
@@ -87,7 +82,7 @@ const ContactForm = () => {
               {...register("email")}
               type="email"
               placeholder="Email Address"
-              className={`w-full bg-transparent border px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-white/60 ${
+              className={`w-full bg-transparent border px-4 py-3 text-sm text-white ${
                 errors.email ? "border-red-500" : "border-white/30"
               }`}
             />
@@ -102,7 +97,7 @@ const ContactForm = () => {
             {...register("phone")}
             type="tel"
             placeholder="Phone"
-            className={`w-full bg-transparent border px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-white/60 ${
+            className={`w-full bg-transparent border px-4 py-3 text-sm text-white ${
               errors.phone ? "border-red-500" : "border-white/30"
             }`}
           />
@@ -116,7 +111,7 @@ const ContactForm = () => {
             {...register("message")}
             placeholder="Message"
             rows={5}
-            className={`w-full bg-transparent border px-4 py-3 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-white/60 resize-y ${
+            className={`w-full bg-transparent border px-4 py-3 text-sm text-white ${
               errors.message ? "border-red-500" : "border-white/30"
             }`}
           />
@@ -125,11 +120,11 @@ const ContactForm = () => {
           )}
         </div>
 
-        <div className="flex items-center gap-4 justify-end">
+        <div className="flex justify-end">
           <button
             type="submit"
             disabled={isSending}
-            className="bg-primary text-primary-foreground px-6 py-2 text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-primary px-6 py-2 text-sm font-semibold disabled:opacity-50"
           >
             {isSending ? "Sending..." : "Submit"}
           </button>
