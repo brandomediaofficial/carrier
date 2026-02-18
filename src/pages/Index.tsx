@@ -42,6 +42,11 @@ const heroSlides = [
 
 const dealers = [
   {
+    name: "Toshiba",
+    description: "Japanese precision engineering",
+    image: "/images/toshiba.jpg",
+  },
+  {
     name: "Carrier",
     description: "World leader in HVAC solutions",
     image: "/images/carrier.jpg",
@@ -50,11 +55,6 @@ const dealers = [
     name: "Midea",
     description: "Innovation-driven comfort technology",
     image: "/images/midea.jpg",
-  },
-  {
-    name: "Toshiba",
-    description: "Japanese precision engineering",
-    image: "/images/toshiba.jpg",
   },
 ];
 

@@ -4,6 +4,15 @@ import { ChevronDown, Menu, X, Phone } from "lucide-react";
 
 const brands = [
   {
+    label: "Toshiba",
+    products: [
+      { label: "Hi Wall AC", link: "/products/toshiba/hi-wall-ac" },
+      { label: "Cassette AC", link: "/products/toshiba/cassette-ac" },
+      { label: "Ducted AC", link: "/products/toshiba/ducted-ac" },
+      { label: "VRF System", link: "/products/toshiba/vrf-system" },
+    ],
+  },
+  {
     label: "Carrier",
     products: [
       { label: "Window AC", link: "/products/carrier/window-ac" },
@@ -21,15 +30,6 @@ const brands = [
       { label: "Window AC", link: "/products/midea/window-ac" },
       { label: "Hi Wall AC", link: "/products/midea/hi-wall-ac" },
       { label: "Home Appliances", link: "/products/midea/home-appliances" },
-    ],
-  },
-  {
-    label: "Toshiba",
-    products: [
-      { label: "Hi Wall AC", link: "/products/toshiba/hi-wall-ac" },
-      { label: "Cassette AC", link: "/products/toshiba/cassette-ac" },
-      { label: "Ducted AC", link: "/products/toshiba/ducted-ac" },
-      { label: "VRF System", link: "/products/toshiba/vrf-system" },
     ],
   },
 ];
@@ -57,13 +57,13 @@ const Header = () => {
       {/* Top bar */}
       <div className="bg-background py-4 px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-            <span className="text-secondary-foreground font-bold text-lg">
+          <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-2xl">
               CA
             </span>
           </div>
           <div>
-            <h1 className="text-secondary font-bold text-xl leading-tight">
+            <h1 className="text-primary font-bold text-3xl leading-tight">
               COMFORT AIRCON
             </h1>
           </div>
@@ -94,15 +94,15 @@ const Header = () => {
       </div>
 
       {/* Red nav bar */}
-      <nav className="bg-[#142C73]">
+      <nav className="bg-primary">
         {/* Desktop */}
         <ul className="hidden md:flex items-center justify-center gap-1">
           {simpleNavItems.map((item) => (
             <li key={item.label}>
               <Link
                 to={item.path}
-                className={`block px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground hover:bg-[#142C73]/80 transition-colors ${
-                  location.pathname === item.path ? "bg-[#142C73]/70" : ""
+                className={`block px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground hover:bg-primary/80 transition-colors ${
+                  location.pathname === item.path ? "bg-primary/70" : ""
                 }`}
               >
                 {item.label}
@@ -122,17 +122,15 @@ const Header = () => {
             }}
           >
             <div
-              className={`flex items-center gap-1 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-cursor-pointer text-primary-foreground hover:bg-[#142C73]/80 transition-colors ${
-                location.pathname.startsWith("/products")
-                  ? "bg-[#142C73]/70"
-                  : ""
+              className={`flex items-center gap-1 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-cursor-pointer text-primary-foreground hover:bg-primary/80 transition-colors ${
+                location.pathname.startsWith("/products") ? "bg-primary/70" : ""
               }`}
             >
               Products <ChevronDown size={14} />
             </div>
 
             {productsOpen && (
-              <div className="absolute left-0 top-full flex bg-[#142C73] shadow-xl z-50 min-w-[420px]">
+              <div className="absolute left-0 top-full flex bg-primary shadow-xl z-50 min-w-[420px]">
                 {/* Brands column */}
                 <div className="w-[200px] border-r border-primary-foreground/20">
                   {brands.map((brand) => (
@@ -155,7 +153,7 @@ const Header = () => {
                 </div>
 
                 {/* Products column */}
-                <div className="w-[220px] bg-[#142C73]/90">
+                <div className="w-[220px] bg-primary/90">
                   {brands
                     .filter((b) => b.label === activeBrand)
                     .map((brand) =>
@@ -179,8 +177,8 @@ const Header = () => {
             <li key={item.label}>
               <Link
                 to={item.path}
-                className={`block px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground hover:bg-[#142C73]/80 transition-colors ${
-                  location.pathname === item.path ? "bg-[#142C73]/70" : ""
+                className={`block px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground hover:bg-primary/80 transition-colors ${
+                  location.pathname === item.path ? "bg-primary/70" : ""
                 }`}
               >
                 {item.label}
@@ -196,7 +194,7 @@ const Header = () => {
               <li key={item.label}>
                 <Link
                   to={item.path}
-                  className="block px-5 py-3 text-sm font-semibold uppercase text-primary-foreground hover:bg-[#142C73]/80"
+                  className="block px-5 py-3 text-sm font-semibold uppercase text-primary-foreground hover:bg-primary/80"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -277,7 +275,7 @@ const Header = () => {
               <li key={item.label}>
                 <Link
                   to={item.path}
-                  className="block px-5 py-3 text-sm font-semibold uppercase text-primary-foreground hover:bg-[#142C73]/80"
+                  className="block px-5 py-3 text-sm font-semibold uppercase text-primary-foreground hover:bg-primary/80"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
