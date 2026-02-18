@@ -6,22 +6,31 @@ const brands = [
   {
     label: "Carrier",
     products: [
-      "Window AC",
-      "Hi Wall AC",
-      "Ducted AC",
-      "Cassette AC",
-      "Slimpak AC",
-      "Package AC",
-      "VRF System",
+      { label: "Window AC", link: "/products/carrier/window-ac" },
+      { label: "Hi Wall AC", link: "/products/carrier/hi-wall-ac" },
+      { label: "Ducted AC", link: "/products/carrier/ducted-ac" },
+      { label: "Cassette AC", link: "/products/carrier/cassette-ac" },
+      { label: "Slimpak AC", link: "/products/carrier/slimpak-ac" },
+      { label: "Package AC", link: "/products/carrier/packaged-ac" },
+      { label: "VRF System", link: "/products/carrier/vrf-system" },
     ],
   },
   {
     label: "Midea",
-    products: ["Window AC", "Hi Wall AC", "Home Appliances"],
+    products: [
+      { label: "Window AC", link: "/products/midea/window-ac" },
+      { label: "Hi Wall AC", link: "/products/midea/hi-wall-ac" },
+      { label: "Home Appliances", link: "/products/midea/home-appliances" },
+    ],
   },
   {
     label: "Toshiba",
-    products: ["Hi Wall AC", "Cassette AC", "Ducted AC", "VRF System"],
+    products: [
+      { label: "Hi Wall AC", link: "/products/toshiba/hi-wall-ac" },
+      { label: "Cassette AC", link: "/products/toshiba/cassette-ac" },
+      { label: "Ducted AC", link: "/products/toshiba/ducted-ac" },
+      { label: "VRF System", link: "/products/toshiba/vrf-system" },
+    ],
   },
 ];
 
@@ -112,16 +121,15 @@ const Header = () => {
               setActiveBrand(null);
             }}
           >
-            <Link
-              to="/products"
-              className={`flex items-center gap-1 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground hover:bg-[#142C73]/80 transition-colors ${
+            <div
+              className={`flex items-center gap-1 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-cursor-pointer text-primary-foreground hover:bg-[#142C73]/80 transition-colors ${
                 location.pathname.startsWith("/products")
                   ? "bg-[#142C73]/70"
                   : ""
               }`}
             >
               Products <ChevronDown size={14} />
-            </Link>
+            </div>
 
             {productsOpen && (
               <div className="absolute left-0 top-full flex bg-[#142C73] shadow-xl z-50 min-w-[420px]">
@@ -153,12 +161,12 @@ const Header = () => {
                     .map((brand) =>
                       brand.products.map((product) => (
                         <Link
-                          key={product}
-                          to={`/products`}
+                          key={product.label}
+                          to={product.link}
                           className="block px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/70 transition-colors"
                           onClick={() => setProductsOpen(false)}
                         >
-                          {product}
+                          {product.label}
                         </Link>
                       )),
                     )}
@@ -247,13 +255,13 @@ const Header = () => {
                       {mobileBrandOpen === brand.label && (
                         <ul className="bg-primary/70">
                           {brand.products.map((p) => (
-                            <li key={p}>
+                            <li key={p.label}>
                               <Link
-                                to="/products"
+                                to={p.link}
                                 className="block px-12 py-2 text-sm text-primary-foreground hover:bg-primary/60"
                                 onClick={() => setMobileOpen(false)}
                               >
-                                {p}
+                                {p.label}
                               </Link>
                             </li>
                           ))}

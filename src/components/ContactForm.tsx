@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -13,24 +15,52 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
+  const [isSending, setIsSending] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
   });
 
   const onSubmit = async (data: FormValues) => {
-    // In a real app, you would send this data to your backend
-    console.log(data);
+    setIsSending(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    toast.success("Message sent successfully! We'll get back to you soon.");
-    reset();
+    if (!serviceId || !templateId || !publicKey) {
+      toast.error(
+        "Email service configuration is missing. Please contact support.",
+      );
+      setIsSending(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone,
+          message: data.message,
+          to_name: "Admin", // Or whoever receives the email
+        },
+        publicKey,
+      );
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      reset();
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -98,10 +128,10 @@ const ContactForm = () => {
         <div className="flex items-center gap-4 justify-end">
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSending}
             className="bg-primary text-primary-foreground px-6 py-2 text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? "Sending..." : "Submit"}
+            {isSending ? "Sending..." : "Submit"}
           </button>
         </div>
       </form>

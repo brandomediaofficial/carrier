@@ -13,8 +13,8 @@ const About = () => {
                 Welcome to Comfort Aircon
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Comfort Aircon was established in the late 1980s and
-                has marked 35 years in the business of Air-conditioning. With
+                Comfort Aircon was established in the late 1999 and
+                has marked 25 years in the business of Air-conditioning. With
                 years of expertise and an eager-growing list of 1000+ clients
                 including Banks, Coffee Houses and Infrastructure Industries, we
                 know what works best in the world of cooling solutions.

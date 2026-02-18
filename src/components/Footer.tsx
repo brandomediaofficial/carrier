@@ -14,7 +14,6 @@ const Footer = () => {
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
-              { name: "Products", path: "/products" },
               { name: "Services", path: "/services" },
               { name: "Our Clients", path: "/clients" },
               { name: "Contact Us", path: "/contact" },
@@ -62,7 +61,7 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-2">
               <Mail size={16} className="shrink-0 text-primary" />
-              <p>Sales@comfortaircon.com</p>
+              <p>admin@comfortair.co.in</p>
             </div>
           </div>
           {/* Map placeholder */}

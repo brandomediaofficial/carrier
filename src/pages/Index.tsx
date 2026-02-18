@@ -205,13 +205,12 @@ const Index = () => {
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto mb-6" />
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Established in 1980, Comfort Aircon is an authorized dealer and
+            Established in 1999, Comfort Aircon is an authorized dealer and
             distributor of Carrier, Midea, and Toshiba air conditioning systems.
-            With offices in Delhi, Noida, and Gurugram, we provide comprehensive
-            HVAC solutions for residential and commercial spaces across the NCR
-            region. Our commitment to quality service and customer satisfaction
-            has made us one of the most trusted names in the air conditioning
-            industry.
+            With offices in Pondicherry, Chennai, we provide comprehensive HVAC
+            solutions for residential and commercial spaces across all region.
+            Our commitment to quality service and customer satisfaction has made
+            us one of the most trusted names in the air conditioning industry.
           </p>
           <Link
             to="/about"
@@ -342,8 +341,7 @@ const Index = () => {
                 605013
               </p>
               <p>+91 98430 20458</p>
-              <p>Sales@comfortaircon.com</p>
-              <p>customersupport@comfortaircon.com</p>
+              <p>admin@comfortair.co.in</p>
             </div>
           </div>
           {/* Quick Enquiry */}

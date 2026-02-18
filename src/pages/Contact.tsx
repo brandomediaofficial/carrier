@@ -16,8 +16,7 @@ const Contact = () => {
                 605013
               </p>
               <p>+91 98430 20458</p>
-              <p>Sales@comfortaircon.com</p>
-              <p>customersupport@comfortaircon.com</p>
+              <p>admin@comfortair.co.in</p>
             </div>
           </div>
           <div>
